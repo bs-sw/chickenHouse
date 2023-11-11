@@ -28,6 +28,7 @@ void setup()
   #endif
 
   //RealTimeClock::setTime(21, 1, 4, 15, 33);
+  lastTime = millis();
 }
 
 void loop() { 

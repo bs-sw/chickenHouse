@@ -134,7 +134,7 @@ int RealTimeClock::getDayLength() {
 }
 
 bool RealTimeClock::isDayLight() {
-  return (getMinutesSinceMidnight() >= EARLIEST_OPENING_TIME && getMinutesSinceMidnight() >= getSunrise() && getMinutesSinceMidnight() < getSunset());
+  return (getMinutesSinceMidnight() >= EARLIEST_OPENING_TIME && getMinutesSinceMidnight() >= getSunrise() && getMinutesSinceMidnight() < getSunset() + SUNSET_OFFSET);
 }
 
 void RealTimeClock::setTime(byte year, byte month, byte day, byte hour, byte minute) {
