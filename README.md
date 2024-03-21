@@ -9,6 +9,7 @@ The earliest time at which the door should open in the morning can also be set. 
 I have been using it for several years. After some initial bugs, no more problems.
 
 Required components:
+ - 1 x Arduino Nano
  - 2 x DS18B20 (outside, inside - just for logging purposes)
  - 1 x relay card with 2 relays (switch light)
  - 1 x 360°-Servo (The servo winds up the cord via a reel.)
