@@ -1,9 +1,9 @@
 #include "chickenHouse.h"
 
-const float baseClock = 200;                            //200 Millisekunden
-const float level1Divider = 1000/baseClock;             //1 Sekunde
-const float level2Divider = 2000/baseClock;             //2 Sekunden
-const float level3Divider = 60000/baseClock;            //1 Minute
+const unsigned long baseClock = 200;                            //200 Millisekunden
+const unsigned long level1Divider = 1000/baseClock;             //1 Sekunde
+const unsigned long level2Divider = 2000/baseClock;             //2 Sekunden
+const unsigned long level3Divider = 60000/baseClock;            //1 Minute
 
 unsigned long cycleCounter;
 unsigned long lastTime;
@@ -49,7 +49,7 @@ void loop() {
     DoorController::process();
 
     //Level1 - jede Sekunde                                             //Offset: 0
-    if ((cycleCounter + 0) % ((unsigned long) level1Divider) == 0) {
+    if ((cycleCounter + 0) % level1Divider == 0) {
       RealTimeClock::addSecond();
       Lcd::refresh();
       #if defined(NO_PERIPHERY) 
@@ -58,7 +58,7 @@ void loop() {
     }
 
     //Level2 - alle 2 Sekunden                                          //Offset: 2
-    if ((cycleCounter + 2)  % ((unsigned long) level2Divider) == 0) {
+    if ((cycleCounter + 2)  % level2Divider == 0) {
       Rs485::communicate();                                                                   //---------------------- temporary moved
       Error::output();
       #if defined(NO_PERIPHERY) 
@@ -67,7 +67,7 @@ void loop() {
     }
 
     //Level3 - jede Minute                                              //Offset: 3
-    if ((cycleCounter + 3)  % ((unsigned long) level3Divider) == 0) {
+    if ((cycleCounter + 3)  % level3Divider == 0) {
       RealTimeClock::refresh();
       TemperatureSensors::refreshTemperatureValues();
       TemperatureSensors::startTemperatureConversion();
@@ -77,7 +77,7 @@ void loop() {
     }
 
     //Level3 - jede Minute                                              //Offset: 4  (Achtung: 4 ist der maximale Offset. Bei 5 gibt es schon Überschneidungen mit dem Level 1.)
-    if ((cycleCounter + 4) % ((unsigned long) level3Divider) == 0) {
+    if ((cycleCounter + 4) % level3Divider == 0) {
       Logger::writeToSD();
       #if defined(NO_PERIPHERY) 
       Serial.println("Level3-2"); 
